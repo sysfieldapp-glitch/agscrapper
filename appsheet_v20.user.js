@@ -1814,24 +1814,8 @@
             autoFillTipeToko();
         }
 
-        // --- FITUR SAFETY GPS LOCK ---
-        // Mencari semua tombol Add/New (termasuk tombol + melayang warna orange di AppSheet)
-        let addBtns = document.querySelectorAll('[aria-label="Add"], [aria-label="New"], [aria-label*="Add"], [aria-label*="New"], [data-help-id="add"], .fab, .app-fab, .add-fab, [data-help-id="New"]');
-        let isGpsReady = (fakeLat && fakeLon);
-
-        addBtns.forEach(btn => {
-            if (!isGpsReady) {
-                btn.style.pointerEvents = 'none';
-                btn.style.opacity = '0.3';
-                btn.style.filter = 'grayscale(100%)';
-                btn.setAttribute('title', 'Tolong set GPS (Manual) terlebih dahulu sebelum membuat data baru!');
-            } else {
-                btn.style.pointerEvents = 'auto';
-                btn.style.opacity = '1';
-                btn.style.filter = 'none';
-                btn.removeAttribute('title');
-            }
-        });
+        // GPS Lock dihapus — user bisa klik Add kapanpun.
+        // GPS diset via sidebar search setelah masuk form.
 
     }, 1000);
 
