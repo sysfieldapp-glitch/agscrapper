@@ -240,8 +240,8 @@
         let dataLokal = GM_getValue(cacheKey);
         if (dataLokal) {
             let parsed = JSON.parse(dataLokal);
-            // Cache 1 Hari (86400000 ms) buat data Github
-            if (parsed.waktu && (now - parsed.waktu < 86400000)) return parsed.data;
+            // Cache 1 Jam (3600000 ms) buat data Github — biar cepet refresh kalau ada update scrape baru
+            if (parsed.waktu && (now - parsed.waktu < 3600000)) return parsed.data;
         }
         let res = await fetch(url);
         if (!res.ok) throw new Error('Gagal fetch Github');
@@ -249,6 +249,7 @@
         GM_setValue(cacheKey, JSON.stringify({ waktu: now, data: data }));
         return data;
     }
+
 
     async function tarikDataGAS(url, cacheKey) {
         let now = Date.now();
